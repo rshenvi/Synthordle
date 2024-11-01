@@ -57,22 +57,22 @@
     },
     {
       "ID": "11",
-      "sequence": ["rxn11_0", "rxn11_1", "rxn11_2", "rxn11_0"],
+      "sequence": ["CuICsOAc", "Pd2dba3alkene", "PhSHNBS", "CuICsOAc"],
       "reference" : "J. Am. Chem. Soc. 2006, 128, 7136-7137"
     },
     {
       "ID": "12",
-      "sequence": ["rxn12_0", "rxn12_1", "rxn12_2", "rxn12_3"],
+      "sequence": ["TMPTBSOTf", "mesitylene150pTsOH", "NaBH4tBuOKMeI", "LDAO2SnCl2"],
       "reference" : "J. Am. Chem. Soc. 2023, 145, 3903−3908"
     },
     {
       "ID": "13",
-      "sequence": ["rxn13_0", "rxn13_1", "rxn13_2", "NaBH4"],
+      "sequence": ["SeO2tBuOOH", "DMPRhCl3", "KOtBuO2POMe3", "NaBH4"],
       "reference" : "J. Am. Chem. Soc. 2004, 126, 16300-16301"
     },
     {
       "ID": "14",
-      "sequence": ["rxn14_0", "rxn14_1", "rxn14_2", "rxn14_3"],
+      "sequence": ["PBu3DEADButyricacid", "hvAcOH", "KMnO4Octanoic", "OsO4NMOCitricAcid"],
       "reference": "ACS Cent. Sci. 2017, 3, 47−51"
     }
 
@@ -88,7 +88,9 @@
                "propenyllithium", "PDC", "EtAlCl2", "CH2OMe2AlCl",
                "TiCl4CH2Br2", "tBuLiDMF", "NaBH4", "triethylorthoacetate",
                "aminophenylaziridine", "Bu3SnHAIBN", "Swern", "MeMgBrTiCl4",
-               "rxn11_0", "rxn11_1", "rxn11_2", "rxn12_0", "rxn12_1", "rxn12_2", "rxn12_3",
-               "rxn13_0", "rxn13_1", "rxn13_2"
+               "CuICsOAc", "Pd2dba3alkene", "PhSHNBS",
+               "TMPTBSOTf", "mesitylene150pTsOH", "NaBH4tBuOKMeI", "LDAO2SnCl2",
+               "SeO2tBuOOH", "DMPRhCl3", "KOtBuO2POMe3",
+               "PBu3DEADButyricacid", "hvAcOH", "KMnO4Octanoic", "OsO4NMOCitricAcid"
               ]
 }

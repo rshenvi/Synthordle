@@ -9,9 +9,9 @@ var gameOver = false;
 let maxReactionID;
 
 // Variables that the user can change
-var reactionID = 0;
+var reactionID;
 var numGuesses = 4;  // Default number of guesses
-var isForward = true;  // Default direction is forward
+var isForward = false;  // Default direction is retro
 
 // Variables to hold the previous settings
 var previousReactionID;
@@ -23,8 +23,6 @@ var previousIsForward;
 
 // Ensure the window is fully loaded before running scripts
 window.onload = function () {
-  fetchReactions(); // Fetch reactions to set maxReactionID
-
   // Add event listeners for all buttons and add event listeners
   const gearIcon = document.getElementById('gearIcon');
   const aboutIcon = document.getElementById('aboutIcon');
@@ -35,27 +33,15 @@ window.onload = function () {
   closeButton.addEventListener('click', hideAboutModal); // Close and hide the about modal
   saveButton.addEventListener('click', saveSettings);  // Save settings and hide modal
   cancelButton.addEventListener('click', cancelSettings); // Cancel settings and hide modal
-
-  // Automatically show the menu modal when user loads the page
-  showSettingsModal(); // Calls function to open the menu modal
+  // Load onto daily problem
+  setDaily();
+  fetchParametersAndInitialize(); // Calls function to open the menu modal
 };
 
 
-// Functions to fetch reactions, set maxReactionID, and randomize
-function fetchReactions() {
-  fetch("reactions.json")
-    .then(response => response.json())
-    .then(data => {
-      maxReactionID = data.reactions.length - 1; // Set maxReactionID based on the number of reactions
-    })
-    .catch(error => console.error('Error fetching data:', error));
-}
-function randomizeReactionId() {
-  const randomId = Math.floor(Math.random() * (maxReactionID + 1)); // Generate a random ID between 0 and maxReactionID
-  document.getElementById('reactionID').value = randomId; // Set the value of the input box to the random ID
-}
-
+///////////////////////////////////////////////////////////////////////////
 //////////////////////////////////MODALS///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 ///////Settings///////
 
@@ -101,6 +87,7 @@ function saveSettings() {
   const directionInput = document.getElementById('direction').value;
 
   reactionID = reactionInput ? parseInt(reactionInput) : 0;
+  console.log(reactionID);
   numGuesses = guessesInput ? parseInt(guessesInput) : 4;
   isForward = directionInput === 'forward';
   const board = document.getElementById('board');
@@ -109,18 +96,7 @@ function saveSettings() {
   keyboard.innerHTML = '';  // Clears the old keyboard
 
   // escape reagents from JSON file and initialize the board
-  fetch("reactions.json")
-    .then(response => response.json())
-    .then(data => {
-      const allReagents = data.reagents;
-      let answer = data.reactions[reactionID].sequence;
-      let reference = data.reactions[reactionID].reference;
-      if (!isForward) answer.reverse();
-      const reagents = generateReagents(allReagents, answer, numChoices);
-
-      initializeBoard(answer, reagents, reference);  // Initialize board after fetching data
-    })
-    .catch(error => console.error('Error fetching data:', error));
+  fetchParametersAndInitialize();
 
   hideSettingsModal();
 }
@@ -146,8 +122,9 @@ function hideAboutModal() {
   }
 }
 
-
-////////////INITIALIZE///////////
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////INITIALIZE////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function initializeBoard(answer, reagents, reference) {
   row = 0; //Reset row to 0
@@ -157,7 +134,7 @@ function initializeBoard(answer, reagents, reference) {
 
   window.answer = answer;
 
-  const gridData = create2DArray();  // Call your existing function
+  const gridData = create2DArray(); 
   const board = document.getElementById('board');
   const keyboard = document.getElementById("keyboard");
   const fragment = document.createDocumentFragment();
@@ -166,14 +143,14 @@ function initializeBoard(answer, reagents, reference) {
   ref.textContent = reference;
 
 
-  // Add product before the first column
+  //First column
   if (isForward) {
     fragment.appendChild(createStart());
   } else {
     fragment.appendChild(createProduct());
   }
 
-  // Add columns and intermediates
+  //intermediates
   gridData.forEach((columnData, index) => {
     const column = createColumn(columnData, index);
     fragment.appendChild(column);
@@ -186,7 +163,7 @@ function initializeBoard(answer, reagents, reference) {
     }
   });
 
-  // Add starting compound after the last column
+  //Last Column
   if (isForward) {
     fragment.appendChild(createProduct()); // Add product (TGT) after last column in forward mode
   } else {
@@ -203,12 +180,30 @@ function initializeBoard(answer, reagents, reference) {
   keyboardFragment.appendChild(createEnter());
   keyboardFragment.appendChild(createDelete());
   keyboard.appendChild(keyboardFragment);
+  
 
   board.appendChild(ref);
+  
 
   // Event listeners
   document.addEventListener("click", handleUserInput);
+  document.addEventListener("keydown", handleKeyboardInput);
 }
+
+function fetchParametersAndInitialize(){
+  fetch("reactions.json")
+    .then(response => response.json())
+    .then(data => {
+      const allReagents = data.reagents;
+      let answer = data.reactions[reactionID].sequence;
+      let reference = data.reactions[reactionID].reference;
+      if (!isForward) answer.reverse();
+      const reagents = generateReagents(allReagents, answer, numChoices);
+
+      initializeBoard(answer, reagents, reference);  // Initialize board after fetching data
+    })
+    .catch(error => console.error('Error fetching data:', error));
+  }
 
 
 
@@ -263,7 +258,6 @@ function createColumn(data, columnNumber) {
   return column;
 }
 
-
 // Function to create boxes for intermediates
 function createIntermediate(columnNumber) {
   const intermediate = document.createElement('span');
@@ -314,6 +308,7 @@ function createStart() {
 
   return start;
 }
+
 //Functions to create keyboard buttons
 function createEnter() {
   const enter = document.createElement('span');
@@ -393,7 +388,7 @@ function showGameOverModal(message) {
   const modal = document.getElementById('gameOverModal').style.display = 'flex';;
   const messageElement = document.getElementById('gameOverMessage');
   messageElement.textContent = message;
-  modal.style.display = 'block'; // Show the modal
+  modal.display = 'block'; // Show the modal
 }
 
 // Function to hide the game over modal
@@ -463,19 +458,26 @@ function revealIntermediateHelper(index) {
 
 function handleUserInput(e) {
   if (gameOver || !takingInput) return;
-
   const targetClass = e.target.classList;
-
   if (targetClass.contains("reagent")) {
-    handleReagentClick(e.target);
+    handleReagent(e.target);
   } else if (targetClass.contains("delete-button")) {
-    handleDeleteClick();
+    handleDelete();
   } else if (targetClass.contains("enter-button")) {
-    handleEnterClick();
+    handleEnter();
   }
 }
 
-function handleReagentClick(target) {
+function handleKeyboardInput(e) {
+  if (gameOver || !takingInput) return;
+  if (e.key == "Backspace") {
+    handleDelete();
+  } else if (e.key == "Enter"){
+    handleEnter();
+  }
+}
+
+function handleReagent(target) {
   if (col < width) {
     let currTile = document.getElementById(`${row}-${col}`);
     currTile.innerHTML = `<img src="Reagents/${target.id}.png" alt="${target.id}">`;
@@ -484,7 +486,7 @@ function handleReagentClick(target) {
   }
 }
 
-function handleDeleteClick() {
+function handleDelete() {
   if (col > 0) {
     col--;
     let currTile = document.getElementById(`${row}-${col}`);
@@ -492,7 +494,7 @@ function handleDeleteClick() {
   }
 }
 
-function handleEnterClick() {
+function handleEnter() {
   if (col === width) {
     update();
   } else {
@@ -527,55 +529,29 @@ function showNotification(message) {
 }
 
 
-//---------------------------------------------------------------------------//
-//------------------------------ INITIALIZE  -------------------------------//
-function initialize() {
-  const gridData = create2DArray();
-  const board = document.getElementById('board');
-  const keyboard = document.getElementById("keyboard");
-  const fragment = document.createDocumentFragment();
+/*function randomizeReactionId() {
+  const randomId = Math.floor(Math.random() * (maxReactionID + 1)); // Generate a random ID between 0 and maxReactionID
+  document.getElementById('reactionID').value = randomId; // Set the value of the input box to the random ID
+}*/
 
+function dailyReactionID() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  const random = Math.sin(dayOfYear) * 10000;
+  return Math.floor((random - Math.floor(random)) * maxReactionID);
+}
 
-  // Add product before the first column
-  if (isForward) {
-    fragment.appendChild(createStart());
-  } else {
-    fragment.appendChild(createProduct());
-  }
+function setDailyReactionID(){
+  dailyID = dailyReactionID();
+  document.getElementById('reactionID').value = dailyID; // Set the value of the input box to the random ID
+}
 
-  // Add columns and intermediates
-  gridData.forEach((columnData, index) => {
-    const column = createColumn(columnData, index);
-    fragment.appendChild(column);
-    if (index < gridData.length - 1) {
-      if (isForward) {
-        fragment.appendChild(createIntermediate(index));
-      }
-      else {
-        fragment.appendChild(createIntermediate(gridData.length - 2 - index));
-      }
-    }
-  })
-
-  // Add starting compound after the last column
-  if (isForward) {
-    fragment.appendChild(createProduct()); // Add product (TGT) after last column in forward mode
-  } else {
-    fragment.appendChild(createStart()); // Add starting material (SM) after columns in backward mode
-  }
-
-
-  board.appendChild(fragment);
-
-  // Create Reagent Keyboard
-  const keyboardFragment = document.createDocumentFragment();
-  reagents.forEach(item => {
-    keyboardFragment.appendChild(createReagents(item));
-  });
-  keyboardFragment.appendChild(createEnter());
-  keyboardFragment.appendChild(createDelete());
-  keyboard.appendChild(keyboardFragment);
-
-  // Event listeners
-  document.addEventListener("click", handleUserInput)
+function setDaily(){
+  fetch("reactions.json")
+    .then(response => response.json())
+    .then(data => {
+      maxReactionID = data.reactions.length - 1; // Set maxReactionID based on the number of reactions
+      reactionID = dailyReactionID();
+    })
 }
