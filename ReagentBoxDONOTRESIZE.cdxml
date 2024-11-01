@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE CDXML SYSTEM "https://static.chemistry.revvitycloud.com/cdxml/CDXML.dtd" >
+<CDXML
+ CreationProgram="ChemDraw 23.1.1.3"
+ Name="ReagentBoxDONTTOUCH.cdxml"
+ BoundingBox="222.74 208.43 435.03 298.80"
+ WindowPosition="0 0"
+ WindowSize="0 0"
+ FractionalWidths="yes"
+ InterpretChemically="yes"
+ ShowAtomQuery="yes"
+ ShowAtomStereo="no"
+ ShowAtomEnhancedStereo="yes"
+ ShowAtomNumber="no"
+ ShowResidueID="no"
+ ShowBondQuery="yes"
+ ShowBondRxn="yes"
+ ShowBondStereo="no"
+ ShowTerminalCarbonLabels="no"
+ ShowNonTerminalCarbonLabels="no"
+ HideImplicitHydrogens="no"
+ Magnification="1385"
+ LabelFont="239"
+ LabelSize="21.6"
+ LabelFace="96"
+ CaptionFont="245"
+ CaptionSize="21.6"
+ CaptionFace="96"
+ HashSpacing="5.66"
+ MarginWidth="4.28"
+ LineWidth="2.76"
+ BoldWidth="3.91"
+ BondLength="38.88"
+ BondSpacing="18"
+ ChainAngle="120"
+ LabelJustification="Auto"
+ CaptionJustification="Left"
+ AminoAcidTermini="HOH"
+ ShowSequenceTermini="yes"
+ ShowSequenceBonds="yes"
+ ShowSequenceUnlinkedBranches="no"
+ ResidueWrapCount="40"
+ ResidueBlockCount="10"
+ LabelLineHeight="10"
+ PrintMargins="50.88 55.84 50.88 55.84"
+ MacPrintInfo="00030000004800480000000003A805580000000003A80558036508E8061800020000004800480000000003A80558000100000064000000010001010100000001270F000100010000000000000000000000000002001901900000000000400000000000000000000100000000000000000000000000000000"
+ ChemPropName=""
+ ChemPropFormula="Chemical Formula: "
+ ChemPropExactMass="Exact Mass: "
+ ChemPropMolWt="Molecular Weight: "
+ ChemPropMOverZ="m/z: "
+ ChemPropAnalysis="Elemental Analysis: "
+ ChemPropBoilingPt="Boiling Point: "
+ ChemPropMeltingPt="Melting Point: "
+ ChemPropCritTemp="Critical Temp: "
+ ChemPropCritPres="Critical Pres: "
+ ChemPropCritVol="Critical Vol: "
+ ChemPropGibbs="Gibbs Energy: "
+ ChemPropLogP="Log P: "
+ ChemPropMR="MR: "
+ ChemPropHenry="Henry&apos;s Law: "
+ ChemPropEForm="Heat of Form: "
+ ChemProptPSA="tPSA: "
+ ChemPropID=""
+ ChemPropFragmentLabel=""
+ color="0"
+ bgcolor="1"
+ RxnAutonumberStart="1"
+ RxnAutonumberConditions="no"
+ RxnAutonumberStyle="Roman"
+ RxnAutonumberFormat="(#)"
+><colortable>
+<color r="1" g="1" b="1"/>
+<color r="0" g="0" b="0"/>
+<color r="1" g="0" b="0"/>
+<color r="1" g="1" b="0"/>
+<color r="0" g="1" b="0"/>
+<color r="0" g="1" b="1"/>
+<color r="0" g="0" b="1"/>
+<color r="1" g="0" b="1"/>
+<color r="0.2902" g="0.2902" b="0.2902"/>
+<color r="0.2902" g="0.2706" b="0.9059"/>
+<color r="0" g="0.0118" b="0.9216"/>
+<color r="0.9255" g="0.9765" b="0.9961"/>
+<color r="0.5020" g="0" b="0"/>
+<color r="0" g="0.2510" b="0.5020"/>
+<color r="0.5020" g="0.5020" b="0.5020"/>
+<color r="0.4000" g="0.4000" b="0.4000"/>
+<color r="0.2000" g="0.2000" b="0.2000"/>
+<color r="0.8000" g="0.9804" b="0.9961"/>
+<color r="0.9020" g="0.9020" b="0.9020"/>
+<color r="0.8902" g="0.8902" b="0.8902"/>
+<color r="0.9608" g="0.9608" b="0.9608"/>
+<color r="0.4902" g="0.4902" b="0.4902"/>
+<color r="0.7020" g="0.7020" b="0.7020"/>
+<color r="0.0706" g="0.0706" b="0.0706"/>
+<color r="0.0314" g="0.2510" b="0.4902"/>
+<color r="0.6000" g="0.6000" b="0.6000"/>
+<color r="0.0902" g="0.0902" b="0.0902"/>
+<color r="0.6510" g="0" b="0.2157"/>
+<color r="0.6353" g="0.7451" b="0.8353"/>
+<color r="0.7255" g="0.7804" b="0.8510"/>
+<color r="0.7451" g="0.7451" b="0.7451"/>
+<color r="0.6667" g="0.0824" b="0.7804"/>
+<color r="0.5255" g="0.6706" b="0.7922"/>
+<color r="0.8471" g="0.8471" b="0.8510"/>
+<color r="0.1255" g="0.3412" b="0.3451"/>
+<color r="0.1412" g="0.2000" b="0.3804"/>
+<color r="0.1216" g="0.3412" b="0.3412"/>
+<color r="0.6510" g="0.0510" b="0.2275"/>
+<color r="0.6510" g="0.0510" b="0.2157"/>
+<color r="0.1373" g="0.2000" b="0.3804"/>
+</colortable><fonttable>
+<font id="239" charset="x-mac-roman" name="Helvetica Neue"/>
+<font id="245" charset="x-mac-roman" name="Helvetica Neue Light"/>
+</fonttable><page
+ id="1176476572"
+ BoundingBox="0 0 2532.48 1648.64"
+ HeaderPosition="36"
+ FooterPosition="36"
+ PrintTrimMarks="yes"
+ HeightPages="2"
+ WidthPages="2"
+><t
+ id="1176476568"
+ p="328.52 248.28"
+ BoundingBox="270.07 232.53 387.70 274.70"
+ Z="123"
+ Warning="ChemDraw can&apos;t interpret this label."
+ CaptionJustification="Center"
+ Justification="Center"
+ LineHeight="auto"
+ LineStarts="11 22"
+><s font="245" size="21.6" color="0" face="96">OsO4, NMO,
+citric acid</s></t><graphic
+ id="1176473239"
+ BoundingBox="432.27 296.04 225.51 211.20"
+ Z="4"
+ GraphicType="Rectangle"
+ RectangleType="Plain"
+ Center3D="328.89 253.62 0"
+ MajorAxisEnd3D="432.27 253.62 0"
+ MinorAxisEnd3D="328.89 296.04 0"
+/><annotation
+ Keyword="Fragment Label"
+ Content="[I]"
+/><annotation
+ Keyword="GUID"
+ Content="9328c81e-2e20-46b1-a0c0-02bea6ee49a2"
+/><annotation
+ Keyword="Name"
+ Content="Scissors"
+/></page></CDXML>

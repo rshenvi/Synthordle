@@ -4,7 +4,7 @@ Thank you for playing Synthordle and for taking the time to look at our code! If
 
 To put in new reactions:
 
-Create a new folder, and name it the next available integer in the "Reactions" folder.
+Step 0: Create a new folder, and name it the next available integer in the "Reactions" folder.
 
 Step 1:
 Use Chemdraw to draw out the starting material, product, and each of the intermediates and individually save them as png files. Fit a white square around your compound before you export from ChemDraw to ensure a square image in order to avoid image distortion. A template with the ChemDraw settings that we use in the Shenvi lab is provided. 
