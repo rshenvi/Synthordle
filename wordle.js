@@ -219,13 +219,16 @@ function shuffleArray(array) {
   }
 }
 
+
+
 function generateReagents(allReagents, answer, x) {
   let reagents = [...answer];
-  allReagents.forEach(reagent => {
-    if (reagents.length < x && !answer.includes(reagent)) {
-      reagents.push(reagent);
+  while (reagents.length < x) {
+    let randomReagent = allReagents[Math.floor(Math.random() * allReagents.length)];
+    if (!reagents.includes(randomReagent)) {
+      reagents.push(randomReagent);
     }
-  });
+  }
   shuffleArray(reagents);
   return reagents;
 }
